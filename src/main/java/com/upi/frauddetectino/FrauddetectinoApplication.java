@@ -1,0 +1,13 @@
+package com.upi.frauddetectino;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class FrauddetectinoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(FrauddetectinoApplication.class, args);
+	}
+
+}

@@ -1,0 +1,25 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: upi-payment-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/upi_fraud_payment?createDatabaseIfNotExists=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+jwt:
+  secret: UpiFraudDetectionJwtSecretKeyForSigningTokensMinimum256BitsRequiredForHS256
+
+fraud:
+  service:
+    url: http://localhost:8083

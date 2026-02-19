@@ -1,0 +1,27 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: auth-service
+  datasource:
+    url: jdbc:mysql://localhost:3307/upi_fraud_auth?createDatabaseIfNotExists=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+jwt:
+  secret: UpiFraudDetectionJwtSecretKeyForSigningTokensMinimum256BitsRequiredForHS256
+  expiration-ms: 86400000
+
+account:
+  max-failed-attempts: 5
+  lock-duration-minutes: 30

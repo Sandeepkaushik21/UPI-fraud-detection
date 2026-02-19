@@ -1,0 +1,38 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: fraud-detection-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/upi_fraud_fraud?createDatabaseIfNotExists=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+fraud:
+  rules:
+    rapid-transaction-window-sec: 60
+    rapid-transaction-threshold: 3
+    amount-spike-multiplier: 5
+    failed-pin-threshold: 3
+    impossible-travel-max-speed-kmh: 1200
+  risk-points:
+    rapid-transaction: 30
+    amount-spike: 25
+    new-device: 20
+    ip-change: 15
+    failed-pin: 40
+    impossible-travel: 100
+    device-spoofing: 40
+    unusual-time: 25
+  risk-levels:
+    low-max: 30
+    medium-max: 60
