@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { upi } from '../api/client';
 import { getDeviceId, getDeviceFingerprintInput } from '../utils/deviceFingerprint';
 import styles from './Dashboard.module.css';
@@ -52,6 +52,11 @@ export default function Dashboard() {
     setPayResult(null);
     setLoading(true);
     try {
+      // Generate unique idempotency key to prevent accidental double debiting on retries
+      const idempotencyKey = typeof crypto !== 'undefined' && crypto.randomUUID
+        ? crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+
       const body = {
         receiverUpiId: receiverUpiId.trim(),
         amount: parseFloat(amount),
@@ -59,6 +64,7 @@ export default function Dashboard() {
         deviceFingerprintInput: getDeviceFingerprintInput(),
         latitude: location.lat ?? undefined,
         longitude: location.lon ?? undefined,
+        idempotencyKey,
       };
       const res = await upi.pay(body);
       setPayResult(res);
